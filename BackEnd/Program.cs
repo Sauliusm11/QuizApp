@@ -1,4 +1,7 @@
 
+using BackEnd.Data.Entities;
+using System.Security.Cryptography.X509Certificates;
+
 namespace BackEnd
 {
     public class Program
@@ -7,6 +10,7 @@ namespace BackEnd
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
             // Add services to the container.
             builder.Services.AddAuthorization();
 
@@ -23,28 +27,35 @@ namespace BackEnd
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
-            var summaries = new[]
+
+            app.MapGet("/quizQuestions", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository) =>
             {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
+                var quizQuestions = quizQuestionRepository.GetQuizQuestions();
+                if (quizQuestions == null || !quizQuestions.Any())
+                {
+                    return Results.NoContent();
+                }
 
-            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
-            {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                    new WeatherForecast
-                    {
-                        Date = DateTime.Now.AddDays(index),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)]
-                    })
-                    .ToArray();
-                return forecast;
+                return Results.Ok(quizQuestions);
             })
-            .WithName("GetWeatherForecast")
+            .WithName("GetQuizQuestions")
+            .WithOpenApi();
+
+            app.MapPost("/quizSubmit", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository) =>
+            {
+                var quizQuestions = quizQuestionRepository.GetQuizQuestions();
+                if (quizQuestions == null || !quizQuestions.Any())
+                {
+                    return Results.NoContent();
+                }
+
+                return Results.Ok(quizQuestions);
+            })
+            .WithName("PostQuizAnswers")
             .WithOpenApi();
 
             app.Run();
