@@ -1,13 +1,33 @@
-﻿
-using BackEnd.Data.Entities.Questions;
+﻿using BackEnd.Data.Entities.Questions;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace BackEnd.Data.Entities
+namespace BackEnd.Data.Repositories
 {
     public class QuizQuestionRepository : IQuizQuestionRepository
     {
-        public QuizQuestionRepository() 
+        private static QuizQuestionRepository instance;
+        private static object threadLock = new object();
+
+        public QuizQuestionRepository()
+        {
+            GetInstance();
+        }
+        public static QuizQuestionRepository GetInstance()
+        {
+            if (instance == null)
+            {
+                lock (threadLock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new QuizQuestionRepository(false);
+                    }
+                }
+            }
+            return instance;
+        }
+        QuizQuestionRepository(bool bad)
         {
             using (var context = new QuizDbContext())
             {
@@ -147,6 +167,26 @@ namespace BackEnd.Data.Entities
                 };
                 context.QuizQuestions.AddRange(questions);
                 context.SaveChanges();
+            }
+        }
+
+        public List<QuizQuestion> GetQuizAnswers()
+        {
+
+            using (var context = new QuizDbContext())
+            {
+                var list = context.QuizQuestions
+                    .Select(question => new QuizQuestion()
+                    {
+                        id = question.id,
+                        Type = question.Type,
+                        Question = question.Question,
+                        Answers = question.Answers,
+                        CorrectAnswer = question.CorrectAnswer
+                    })
+                    .ToList();
+
+                return list;
             }
         }
 

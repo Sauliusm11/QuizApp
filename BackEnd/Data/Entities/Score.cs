@@ -4,7 +4,7 @@ namespace BackEnd.Data.Entities
 {
     public class Score
     {
-        public required int id { get; set; }
+        public required int Id { get; set; }
         public required DateTime DateTime { get; set; }
         public required int Points {get; set; }
         [Required]
