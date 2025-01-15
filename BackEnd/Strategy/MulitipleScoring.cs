@@ -18,7 +18,7 @@
                     }
                 }
             }
-            return (int)MathF.Ceiling((100/correctAnswers.Length)*answeredCorrectly);
+            return (int)MathF.Ceiling(((float)100 /correctAnswers.Length)*answeredCorrectly);
         }
     }
 }

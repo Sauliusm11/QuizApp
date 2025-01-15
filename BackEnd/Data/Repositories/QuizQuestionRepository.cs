@@ -35,7 +35,7 @@ namespace BackEnd.Data.Repositories
                 {
                     new QuizQuestion()
                     {
-                        id = 0,//0 makes it automatic
+                        Id = 0,//0 makes it automatic
                         Type = 0,
                         Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                         CorrectAnswer ="0",
@@ -48,7 +48,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 0,
                         Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                         CorrectAnswer ="0",
@@ -62,7 +62,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 0,
                         Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                         CorrectAnswer ="1",
@@ -76,7 +76,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 0,
                         Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                         CorrectAnswer ="3",
@@ -90,7 +90,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 1,
                         Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,2",
@@ -104,7 +104,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 1,
                         Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,1,3",
@@ -118,7 +118,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 1,
                         Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="2",
@@ -133,7 +133,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 1,
                         Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,3,4",
@@ -148,7 +148,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 2,
                         Question ="Did I spend too much time coming up with these mimic logic questions? \n " +
                         "Please capitalize the first letter of your answer",
@@ -157,7 +157,7 @@ namespace BackEnd.Data.Repositories
                     },
                     new QuizQuestion()
                     {
-                        id=0,//0 makes it automatic
+                        Id=0,//0 makes it automatic
                         Type = 2,
                         Question ="But was it fun? \n " +
                         "Please capitalize the first letter of your answer",
@@ -178,7 +178,7 @@ namespace BackEnd.Data.Repositories
                 var list = context.QuizQuestions
                     .Select(question => new QuizQuestion()
                     {
-                        id = question.id,
+                        Id = question.Id,
                         Type = question.Type,
                         Question = question.Question,
                         Answers = question.Answers,
@@ -197,7 +197,7 @@ namespace BackEnd.Data.Repositories
                 var list = context.QuizQuestions
                     .Select(question => new QuizQuestion()
                     {
-                        id = question.id,
+                        Id = question.Id,
                         Type = question.Type,
                         Question = question.Question,
                         Answers = question.Answers,

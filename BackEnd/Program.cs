@@ -14,6 +14,7 @@ namespace BackEnd
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
+            builder.Services.AddScoped<IScoreRepository, ScoreRepository>();
             // Add services to the container.
             builder.Services.AddAuthorization();
 
@@ -48,7 +49,7 @@ namespace BackEnd
             .WithName("GetQuizQuestions")
             .WithOpenApi();
 
-            app.MapPost("/quizSubmit", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository, CreateScoreDto createScoreDto) =>
+            app.MapPost("/quizSubmit", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository, CreateScoreDto createScoreDto, IScoreRepository scoreRepository) =>
             {
                 CreateScoreDtoValidator validator = new CreateScoreDtoValidator();
                 ValidationResult validationResult = validator.Validate(createScoreDto);
@@ -78,6 +79,7 @@ namespace BackEnd
                         }
                         score += context.GetScore(answers[i], quizQuestions[i].CorrectAnswer);
                     }
+                    scoreRepository.AddScore(score, createScoreDto.Email);
                     return Results.Ok(score);
                 }
                 else
@@ -87,6 +89,19 @@ namespace BackEnd
                 }
             })
             .WithName("PostQuizAnswers")
+            .WithOpenApi();
+
+            app.MapGet("/Scores", (HttpContext httpContext, IScoreRepository scoreRepository) =>
+            {
+                var scores = scoreRepository.GetScores();
+                if (scores == null || !scores.Any())
+                {
+                    return Results.NoContent();
+                }
+
+                return Results.Ok(scores);
+            })
+            .WithName("GetScores")
             .WithOpenApi();
 
             app.Run();

@@ -11,7 +11,6 @@
 
         public int GetScore(string answer, string correctAnswer)
         {
-            Console.WriteLine(string.Format("Got {0} expected {1}",answer, correctAnswer));
             if(scoringStrategy == null)
             {
                 return 0;
