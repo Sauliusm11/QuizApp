@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import './App.css'
+import './ScorePage.css'
 
-function App() {
+function ScorePage() {
   const [count, setCount] = useState(0)
 
   return (
@@ -28,4 +28,4 @@ function App() {
   )
 }
 
-export default App
+export default ScorePage
