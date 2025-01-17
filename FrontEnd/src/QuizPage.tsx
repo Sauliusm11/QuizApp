@@ -120,7 +120,6 @@ function QuizPage() {
  }, []);
   return (
     <>
-      <h1>Navigation buttons here</h1>
       <div className="card">
         <Stepper nonLinear activeStep={activeStep}>
         {questions.map((_, index) => (
