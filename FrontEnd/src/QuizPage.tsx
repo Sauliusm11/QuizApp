@@ -22,9 +22,17 @@ answers: string[];
 function QuizPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeStep, setActiveStep] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [answers, setAnswers] = useState<{
+    [k: number]: string;
+  }>({});
   const [completed, setCompleted] = useState<{
     [k: number]: boolean;
   }>({});
+
+  const handleCallback = (childData : string) =>{
+    setAnswer(childData)
+  }
 
   const totalSteps = () => {
     return questions.length;
@@ -65,6 +73,11 @@ function QuizPage() {
       ...completed,
       [activeStep]: true,
     });
+    setAnswers({
+      ...answers,
+      [activeStep]: answer,
+    })
+    console.log(answers)
     handleNext();
   };
   const handleSubmit = () =>{
@@ -114,10 +127,16 @@ function QuizPage() {
 
         ) : (
           <>
+                {activeStep !== questions.length &&
+                (completed[activeStep] ? (
+                  <p>Submited answer: {questions[activeStep].answers[Number(answers[activeStep])]}</p>
+                ) : (
+                  <p>Unanswered question</p>
+                ))}
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
               Question {activeStep + 1}
             </Typography>
-            {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers}></SimpleQuestion>) 
+            {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback ={handleCallback}></SimpleQuestion>) 
             :(
               <>
               {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers}></MultipleQuestion>) 
@@ -140,10 +159,9 @@ function QuizPage() {
               </Button>
               {activeStep !== questions.length &&
                 (completed[activeStep] ? (
+                  // https://stackoverflow.com/questions/70886553/submitting-form-from-parent-component
                   <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? 'Finish'
-                      : 'Resubmit answer'}
+                    Resubmit answer
                   </Button>
                 ) : (
                   <Button onClick={handleComplete}>
