@@ -12,7 +12,7 @@ namespace BackEnd.Data.Dtos
         public CreateScoreDtoValidator()
         {
             RuleFor(dto => dto.Email).NotEmpty().NotNull().EmailAddress().Length(min: 2, max: 255);
-            RuleFor(dto => dto.Email).NotEmpty().NotNull();
+            RuleFor(dto => dto.answers).NotEmpty().NotNull();
         }
     }
 

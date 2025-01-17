@@ -69,7 +69,7 @@ namespace BackEnd.Data.Repositories
                         Answers = new List<string>()
                         {
                             "These questions are inspired by the game Mimic Logic",
-                            "All answers are helpful to finding the mimic",
+                            "All answers are strictly related to finding the mimic",
                             "There is a mimic next to me",
                             "I am not a mimic"
                         }
