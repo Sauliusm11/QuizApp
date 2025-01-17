@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MultipleQuestion from './Components/MultipleQuestion';
 import TextQuestion from './Components/TextQuestion';
+import FormGroup from '@mui/material/FormGroup';
+import TextField from '@mui/material/TextField';
 
 
 type Question = {
@@ -20,6 +22,7 @@ correctAnswer: string;
 answers: string[];
 };
 function QuizPage() {
+  const [email, setEmail] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -82,6 +85,25 @@ function QuizPage() {
     handleNext();
   };
   const handleSubmit = () =>{
+    // https://stackoverflow.com/a/7786283
+    let emailRegEx : RegExp = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*")
+    if(emailRegEx.test(email)){
+      console.log(answers)
+      axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/quizSubmit`,{
+        answers: Object.entries(answers).map(([_, value]) => value),
+        email: email
+      })
+    .then(function (response) {
+        // const data: Question[] = response.data;
+        console.log(response.data)
+    })
+    .catch(function (error) {
+        console.log(error)
+    });
+    }
+    //Need validation now :(
+    console.log(answers)
+    console.log(email)
     //Submition api call here
   }
   function GetQuizQuestions(){
@@ -118,12 +140,14 @@ function QuizPage() {
       <div>
         {allStepsCompleted() ? (
             <>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-            This is where email submition will be
-          </Typography><Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          <FormGroup onSubmit={handleSubmit}>
+              Enter your email
+              <TextField id="outlined-basic" autoFocus required label="Email" type="email" variant="outlined" onChange={e => setEmail(e.target.value)}/>
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleSubmit}>Submit</Button>
             </Box>
+          </FormGroup>
             </>
 
         ) : (

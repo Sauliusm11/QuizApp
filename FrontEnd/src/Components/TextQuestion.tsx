@@ -19,7 +19,7 @@ function TextQuestion({question, parentCallback} : TextQuestionProps) {
     <>
     <h3>{question}</h3>
     <FormGroup>
-        <TextField id="outlined-basic" label="Answer" variant="outlined" onChange={handleTextChange}/>
+        <TextField id="outlined-basic" autoFocus label="Answer" variant="outlined" onChange={handleTextChange}/>
     </FormGroup>
     </>
   )
