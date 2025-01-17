@@ -85,7 +85,7 @@ function QuizPage() {
     handleNext();
   };
   const handleSubmit = () =>{
-    // https://stackoverflow.com/a/7786283
+    //Could not figure out how to pass the built in validation to here so I used the closest thing I found https://stackoverflow.com/a/7786283
     let emailRegEx : RegExp = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*")
     if(emailRegEx.test(email)){
       console.log(answers)
@@ -94,17 +94,12 @@ function QuizPage() {
         email: email
       })
     .then(function (response) {
-        // const data: Question[] = response.data;
         console.log(response.data)
     })
     .catch(function (error) {
         console.log(error)
     });
     }
-    //Need validation now :(
-    console.log(answers)
-    console.log(email)
-    //Submition api call here
   }
   function GetQuizQuestions(){
     axios({
