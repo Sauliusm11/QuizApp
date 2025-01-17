@@ -31,6 +31,7 @@ function QuizPage() {
   }>({});
 
   const handleCallback = (childData : string) =>{
+    console.log(childData)
     setAnswer(childData)
   }
 
@@ -55,7 +56,7 @@ function QuizPage() {
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
           // find the first step that has not been completed
-          questions.findIndex((questions, i) => !(i in completed))
+          questions.findIndex((_, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -105,7 +106,7 @@ function QuizPage() {
       <h1>Navigation buttons here</h1>
       <div className="card">
         <Stepper nonLinear activeStep={activeStep}>
-        {questions.map((question, index) => (
+        {questions.map((_, index) => (
           <Step key={index} completed={completed[index]}>
             <StepButton color="inherit" onClick={handleStep(index)}>
               {"Question"+(index+1)}
@@ -136,12 +137,12 @@ function QuizPage() {
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
               Question {activeStep + 1}
             </Typography>
-            {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback ={handleCallback}></SimpleQuestion>) 
+            {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback ={handleCallback} key={activeStep}></SimpleQuestion>) 
             :(
               <>
-              {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers}></MultipleQuestion>) 
+              {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></MultipleQuestion>) 
               : (
-              <TextQuestion question={questions[activeStep].question}></TextQuestion>)}
+              <TextQuestion question={questions[activeStep].question} key={activeStep}></TextQuestion>)}
               </>)  
             }
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -160,11 +161,11 @@ function QuizPage() {
               {activeStep !== questions.length &&
                 (completed[activeStep] ? (
                   // https://stackoverflow.com/questions/70886553/submitting-form-from-parent-component
-                  <Button onClick={handleComplete}>
+                  <Button onClick={handleComplete} disabled={(answer === ""?true:false)}>
                     Resubmit answer
                   </Button>
                 ) : (
-                  <Button onClick={handleComplete}>
+                  <Button onClick={handleComplete} disabled={(answer === ""?true:false)}>
                     {completedSteps() === totalSteps() - 1
                       ? 'Finish'
                       : 'Submit answer'}
