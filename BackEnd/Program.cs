@@ -91,7 +91,7 @@ namespace BackEnd
             .WithName("PostQuizAnswers")
             .WithOpenApi();
 
-            app.MapGet("/Scores", (HttpContext httpContext, IScoreRepository scoreRepository) =>
+            app.MapGet("/scores", (HttpContext httpContext, IScoreRepository scoreRepository) =>
             {
                 var scores = scoreRepository.GetScores();
                 if (scores == null || !scores.Any())
