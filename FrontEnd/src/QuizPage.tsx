@@ -142,7 +142,7 @@ function QuizPage() {
               <>
               {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></MultipleQuestion>) 
               : (
-              <TextQuestion question={questions[activeStep].question} key={activeStep}></TextQuestion>)}
+              <TextQuestion question={questions[activeStep].question} parentCallback={handleCallback} key={activeStep}></TextQuestion>)}
               </>)  
             }
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
