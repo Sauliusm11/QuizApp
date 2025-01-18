@@ -66,7 +66,6 @@ namespace BackEnd
                     context.SetScoringStrategy(simpleScoring);
                     int score = 0;
                     string[] answers = createScoreDto.answers;
-                    Console.WriteLine(quizQuestions.Count);
                     for (int i = 0; i < quizQuestions.Count; i++)
                     {
                         if(quizQuestions[i].Type != 1)
