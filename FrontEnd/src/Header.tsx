@@ -20,7 +20,7 @@ function Header() {
       <Link href="/quiz" underline="hover">
         {'Quiz'}
       </Link>
-      <Link href="/high-score" underline="hover">
+      <Link href="/high-scores" underline="hover">
         {'HighScores'}
       </Link>
     </Box>
