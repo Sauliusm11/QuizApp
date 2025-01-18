@@ -14,11 +14,11 @@ import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router';
 
 type Question = {
-id: number;
-type: number;
-question: string;
-correctAnswer: string;
-answers: string[];
+  id: number;
+  type: number;
+  question: string;
+  correctAnswer: string;
+  answers: string[];
 }
 
 function QuizPage() {
@@ -116,56 +116,57 @@ function QuizPage() {
     .catch(function (error) {
         console.log(error)
     });
-};
+  };
 
   useEffect(() => {
    GetQuizQuestions()
- }, []);
+  }, []);
 
   return (
     <>
       <div className="card">
         <Stepper nonLinear activeStep={activeStep}>
-        {questions.map((_, index) => (
-          <Step key={index} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
-              {"Question"+(index+1)}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
+          {questions.map((_, index) => (
+            <Step key={index} completed={completed[index]}>
+              <StepButton color="inherit" onClick={handleStep(index)}>
+                {"Question"+(index+1)}
+              </StepButton>
+            </Step>
+          ))}
+        </Stepper>
       </div>
       <div>
         {allStepsCompleted() ? (
-            <>
-          <FormGroup onSubmit={handleSubmit}>
-              Enter your email
-              <TextField id="outlined-basic" autoFocus required label="Email" type="email" variant="outlined" onChange={e => setEmail(e.target.value)}/>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleSubmit}>Submit</Button>
-            </Box>
-          </FormGroup>
-            </>
+          <>
+            <FormGroup onSubmit={handleSubmit}>
+                Enter your email
+                <TextField id="outlined-basic" autoFocus required label="Email" type="email" variant="outlined" onChange={e => setEmail(e.target.value)}/>
+                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                  <Box sx={{ flex: '1 1 auto' }} />
+                    <Button onClick={handleSubmit}>Submit</Button>
+                </Box>
+            </FormGroup>
+          </>
         ) : (
           <>
-                {activeStep !== questions.length &&
-                (completed[activeStep] ? (
-                  <p>Submited answer: { questions[activeStep].type !== 2 ? (questions[activeStep].answers.filter((_,index)=>answers[activeStep].split(",").map(Number).includes(index)).map((answer) => (
-                    <p>{answer}</p>
-                  ))):(<p>{answers[activeStep]}</p>)}</p>
-                ) : (
-                  <p>Unanswered question</p>
-                ))}
+            {activeStep !== questions.length && (completed[activeStep] ? (
+              <p>Submited answer: { questions[activeStep].type !== 2 ? (
+                questions[activeStep].answers.filter((_,index)=>answers[activeStep].split(",").map(Number).includes(index)).map((answer) => (
+                <p>{answer}</p>
+              ))
+              ) : ( <p>{answers[activeStep]}</p>)}</p>
+            ) : (
+              <p>Unanswered question</p>
+            ))}
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
               Question {activeStep + 1}
             </Typography>
-            {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback ={handleCallback} key={activeStep}></SimpleQuestion>) 
-            : (
+            {questions[activeStep].type === 0 ? (<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></SimpleQuestion>
+            ) : (
               <>
-              {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></MultipleQuestion>) 
-              : (
-              <TextQuestion question={questions[activeStep].question} parentCallback={handleCallback} key={activeStep}></TextQuestion>)}
+                {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></MultipleQuestion>
+                ) : (
+                <TextQuestion question={questions[activeStep].question} parentCallback={handleCallback} key={activeStep}></TextQuestion>)}
               </>)  
             }
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -181,14 +182,13 @@ function QuizPage() {
               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button>
-              {activeStep !== questions.length &&
-                (completed[activeStep] ? (
+              {activeStep !== questions.length &&(completed[activeStep] ? (
                   // https://stackoverflow.com/questions/70886553/submitting-form-from-parent-component
-                  <Button onClick={handleComplete} disabled={(answer === ""?true:false)}>
+                  <Button onClick={handleComplete} disabled={(answer === "" ? true : false)}>
                     Resubmit answer
                   </Button>
                 ) : (
-                  <Button onClick={handleComplete} disabled={(answer === ""?true:false)}>
+                  <Button onClick={handleComplete} disabled={(answer === "" ? true : false)}>
                     {completedSteps() === totalSteps() - 1
                       ? 'Finish'
                       : 'Submit answer'}

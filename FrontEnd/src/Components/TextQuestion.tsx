@@ -3,8 +3,8 @@ import TextField from "@mui/material/TextField";
 import { SyntheticEvent, useEffect } from "react";
 
 interface TextQuestionProps{
-    question : string;
-    parentCallback : Function;
+  question : string;
+  parentCallback : Function;
 }
 function TextQuestion({question, parentCallback} : TextQuestionProps) {
 
@@ -15,13 +15,13 @@ function TextQuestion({question, parentCallback} : TextQuestionProps) {
 
   useEffect(() => {
       parentCallback("");
-    }, []);
+  }, []);
   return (
     <>
-    <h3>{question}</h3>
-    <FormGroup>
-        <TextField id="outlined-basic" autoFocus label="Answer" variant="outlined" onChange={handleTextChange}/>
-    </FormGroup>
+      <h3>{question}</h3>
+      <FormGroup>
+          <TextField id="outlined-basic" autoFocus label="Answer" variant="outlined" onChange={handleTextChange}/>
+      </FormGroup>
     </>
   );
 }

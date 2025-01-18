@@ -56,41 +56,40 @@ function ScorePage() {
     .catch(function (error) {
         console.log(error)
     });
-};
+  };
 
   useEffect(() => {
     GetHighScores()
- }, []);
+  }, []);
 
   return (
     <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-          <TableCell>Score</TableCell>
-          <TableCell>Email</TableCell>
-          <TableCell>Date</TableCell>
-          </TableRow>
-          </TableHead>
-          <TableBody>
-          {scores ? (scores.map((score)=>(
-             <ThemeProvider theme={theme}>
-            <TableRow>
-              <TableCell>{score.points.toString()}</TableCell>
-              <TableCell>{score.email}</TableCell>
-              <TableCell>{new Date(score.dateTime).toUTCString()}</TableCell>
-          </TableRow></ThemeProvider>))
-          ) : (
-            <TableRow>
-              <TableCell align='center' colSpan={3}>No scores available</TableCell>
-            </TableRow>
-          )}
-          </TableBody>
-          
-      </Table>
-    </TableContainer>
-
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+              <TableRow>
+                <TableCell>Score</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+            {scores ? (scores.map((score)=>(
+              <ThemeProvider theme={theme}>
+                <TableRow>
+                  <TableCell>{score.points.toString()}</TableCell>
+                  <TableCell>{score.email}</TableCell>
+                  <TableCell>{new Date(score.dateTime).toUTCString()}</TableCell>
+                </TableRow>
+              </ThemeProvider>))
+            ) : (
+              <TableRow>
+                <TableCell align='center' colSpan={3}>No scores available</TableCell>
+              </TableRow>
+            )}
+            </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }

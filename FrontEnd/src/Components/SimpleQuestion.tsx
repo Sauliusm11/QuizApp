@@ -4,9 +4,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import { SyntheticEvent, useEffect } from "react";
 
 interface SimpleQuestionProps{
-    question : string;
-    answers : string[];
-    parentCallback : Function;
+  question : string;
+  answers : string[];
+  parentCallback : Function;
 }
 function SimpleQuestion({question, answers, parentCallback} : SimpleQuestionProps) {
 
@@ -17,16 +17,16 @@ function SimpleQuestion({question, answers, parentCallback} : SimpleQuestionProp
   
   useEffect(() => {
      parentCallback("0");
-   }, []);
+  }, []);
   return (
     <>
-    <h3>{question}</h3>
-    <RadioGroup
-    defaultValue="0"
-    name="radio-buttons-group"
-    >
-        {answers.map((answer, index)=> ( <FormControlLabel value={index} control={<Radio />} label={answer} onChange={handleRadioChange}/>))}
-    </RadioGroup>
+      <h3>{question}</h3>
+      <RadioGroup
+      defaultValue="0"
+      name="radio-buttons-group"
+      >
+          {answers.map((answer, index)=> ( <FormControlLabel value={index} control={<Radio />} label={answer} onChange={handleRadioChange}/>))}
+      </RadioGroup>
     </>
   );
 }

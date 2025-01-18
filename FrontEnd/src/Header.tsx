@@ -6,25 +6,25 @@ function Header() {
   return (
     <>
      <AppBar sx={{ bgcolor: "white"}}>
-     <Box
+      <Box
       sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        typography: 'body1',
-        '& > :not(style) ~ :not(style)': {
-          ml: 2,
-        },
-      }}
-      
-    >
-      <Link href="/quiz" underline="hover">
-        {'Quiz'}
-      </Link>
-      <Link href="/high-scores" underline="hover">
-        {'HighScores'}
-      </Link>
-    </Box>
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          typography: 'body1',
+          '& > :not(style) ~ :not(style)': {
+            ml: 2,
+          },
+        }}
+        
+      >
+        <Link href="/quiz" underline="hover">
+          {'Quiz'}
+        </Link>
+        <Link href="/high-scores" underline="hover">
+          {'HighScores'}
+        </Link>
+      </Box>
     </AppBar>
     </>
   );
