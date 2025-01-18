@@ -10,6 +10,8 @@ import Paper from '@mui/material/Paper';
 import TableCell from '@mui/material/TableCell';
 import createTheme from '@mui/material/styles/createTheme';
 import { ThemeProvider } from '@emotion/react';
+import { useLocation } from 'react-router';
+import { Alert } from '@mui/material';
 
 const theme = createTheme({
   components: {
@@ -40,6 +42,7 @@ type Score = {
 
 function ScorePage() {
   const [scores, setScores] = useState<Score[]>();
+  const location = useLocation()
 
   function GetHighScores(){
     axios({
@@ -64,6 +67,7 @@ function ScorePage() {
 
   return (
     <>
+      {location.state && <Alert>Your score of {location.state.score} submitted successfully </Alert>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

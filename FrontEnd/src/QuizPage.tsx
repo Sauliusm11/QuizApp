@@ -95,7 +95,7 @@ function QuizPage() {
       })
     .then(function (response) {
         console.log(response.data);
-        navigate("/high-scores");
+        navigate("/high-scores",{state : {score : response.data}});
     })
     .catch(function (error) {
         console.log(error);
