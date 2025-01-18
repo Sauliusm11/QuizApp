@@ -92,21 +92,21 @@ namespace BackEnd.Data.Repositories
                     {
                         Id=0,//0 makes it automatic
                         Type = 1,
-                        Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
+                        Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,2",
                         Answers = new List<string>()
                         {
                             "There are no mimics",
-                            "There are two mimics",
+                            "The answer above me is a mimic",
                             "I am surrounded by mimics",
-                            "The answer above me is a mimic"
+                            "There are two mimics"
                         }
                     },
                     new QuizQuestion()
                     {
                         Id=0,//0 makes it automatic
                         Type = 1,
-                        Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
+                        Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,1,3",
                         Answers = new List<string>()
                         {
@@ -120,12 +120,12 @@ namespace BackEnd.Data.Repositories
                     {
                         Id=0,//0 makes it automatic
                         Type = 1,
-                        Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
+                        Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="2",
                         Answers = new List<string>()
                         {
                             "There is only one mimic",
-                            "There is a mimic next to me",
+                            "There is exactly one mimic next to me",
                             "There are exactly two mimics",
                             "There is only one mimic",
                             "The answer above me is not a mimic"
@@ -135,7 +135,7 @@ namespace BackEnd.Data.Repositories
                     {
                         Id=0,//0 makes it automatic
                         Type = 1,
-                        Question ="Mimic Logic hard mode: one(or more) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
+                        Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                         CorrectAnswer ="0,3,4",
                         Answers = new List<string>()
                         {
