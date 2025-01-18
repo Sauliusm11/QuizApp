@@ -1,4 +1,6 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
 import { SyntheticEvent, useEffect, useState } from "react";
 
 interface MultipleQuestionProps{

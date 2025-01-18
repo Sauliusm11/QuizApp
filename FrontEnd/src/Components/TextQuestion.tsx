@@ -1,4 +1,5 @@
-import { FormGroup, TextField } from "@mui/material";
+import FormGroup from "@mui/material/FormGroup";
+import TextField from "@mui/material/TextField";
 import { SyntheticEvent, useEffect } from "react";
 
 interface TextQuestionProps{
