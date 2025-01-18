@@ -11,21 +11,6 @@ import TableCell from '@mui/material/TableCell';
 import createTheme from '@mui/material/styles/createTheme';
 import { ThemeProvider } from '@emotion/react';
 
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      info: string;
-    };
-  }
-  // allow configuration using `createTheme()`
-  interface ThemeOptions {
-    status?: {
-      info?: string;
-    };
-  }
-}
-
 const theme = createTheme({
   components: {
     MuiTableRow: {
@@ -53,7 +38,7 @@ type Score = {
   email: string;
   };
 function ScorePage() {
-  const [scores, setScores] = useState<Score[]>([]);
+  const [scores, setScores] = useState<Score[]>();
 
   function GetHighScores(){
     axios({
@@ -85,16 +70,21 @@ function ScorePage() {
           <TableCell>Date</TableCell>
           </TableRow>
           </TableHead>
-          <ThemeProvider theme={theme}>
           <TableBody>
-          {scores.map((score)=>(
+          {scores ? (scores.map((score)=>(
+             <ThemeProvider theme={theme}>
             <TableRow>
               <TableCell>{score.points.toString()}</TableCell>
               <TableCell>{score.email}</TableCell>
               <TableCell>{new Date(score.dateTime).toUTCString()}</TableCell>
-          </TableRow>))}
+          </TableRow></ThemeProvider>))
+          ) : (
+            <TableRow>
+              <TableCell align='center' colSpan={3}>No scores available</TableCell>
+            </TableRow>
+          )}
           </TableBody>
-          </ThemeProvider>
+          
       </Table>
     </TableContainer>
 
