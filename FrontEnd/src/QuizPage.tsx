@@ -150,11 +150,11 @@ function QuizPage() {
         ) : (
           <>
             {activeStep !== questions.length && (completed[activeStep] ? (
-              <p>Submited answer: { questions[activeStep].type !== 2 ? (
+              <Box>Submited answer: { questions[activeStep].type !== 2 ? (
                 questions[activeStep].answers.filter((_,index)=>answers[activeStep].split(",").map(Number).includes(index)).map((answer) => (
                 <p>{answer}</p>
               ))
-              ) : ( <p>{answers[activeStep]}</p>)}</p>
+              ) : ( <p>{answers[activeStep]}</p>)}</Box>
             ) : (
               <p>Unanswered question</p>
             ))}
