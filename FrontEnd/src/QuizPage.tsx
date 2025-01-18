@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './QuizPage.css';
 import axios from 'axios';
 import SimpleQuestion from './Components/SimpleQuestion';
 import Stepper from '@mui/material/Stepper';
