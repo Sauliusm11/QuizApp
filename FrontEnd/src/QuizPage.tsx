@@ -124,7 +124,7 @@ function QuizPage() {
 
   return (
     <>
-      <div className="card">
+      <Box sx={{ margin: '1.5rem' }}>
         <Stepper nonLinear activeStep={activeStep}>
           {questions.map((_, index) => (
             <Step key={index} completed={completed[index]}>
@@ -134,7 +134,7 @@ function QuizPage() {
             </Step>
           ))}
         </Stepper>
-      </div>
+      </Box>
       <div>
         {allStepsCompleted() ? (
           <>
