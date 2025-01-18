@@ -12,6 +12,7 @@ import MultipleQuestion from './Components/MultipleQuestion';
 import TextQuestion from './Components/TextQuestion';
 import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
+import { useNavigate } from 'react-router';
 
 
 type Question = {
@@ -32,9 +33,10 @@ function QuizPage() {
   const [completed, setCompleted] = useState<{
     [k: number]: boolean;
   }>({});
+  const navigate = useNavigate();
 
   const handleCallback = (childData : string) =>{
-    console.log(childData)
+    // console.log(childData)
     setAnswer(childData)
   }
 
@@ -81,7 +83,6 @@ function QuizPage() {
       ...answers,
       [activeStep]: answer,
     })
-    console.log(answers)
     handleNext();
   };
   const handleSubmit = () =>{
@@ -95,6 +96,7 @@ function QuizPage() {
       })
     .then(function (response) {
         console.log(response.data)
+        navigate("/high-scores")
     })
     .catch(function (error) {
         console.log(error)
@@ -148,7 +150,9 @@ function QuizPage() {
           <>
                 {activeStep !== questions.length &&
                 (completed[activeStep] ? (
-                  <p>Submited answer: {questions[activeStep].answers[Number(answers[activeStep])]}</p>
+                  <p>Submited answer: { questions[activeStep].type !== 2 ? (questions[activeStep].answers.filter((_,index)=>answers[activeStep].split(",").map(Number).includes(index)).map((answer) => (
+                    <p>{answer}</p>
+                  ))):(<p>{answers[activeStep]}</p>)}</p>
                 ) : (
                   <p>Unanswered question</p>
                 ))}
@@ -156,7 +160,7 @@ function QuizPage() {
               Question {activeStep + 1}
             </Typography>
             {questions[activeStep].type === 0 ?(<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback ={handleCallback} key={activeStep}></SimpleQuestion>) 
-            :(
+            : (
               <>
               {questions[activeStep].type === 1 ? (<MultipleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></MultipleQuestion>) 
               : (
