@@ -1,10 +1,10 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material"
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { SyntheticEvent, useEffect, useState } from "react";
 
 interface MultipleQuestionProps{
-    question : string
-    answers : string[]
-    parentCallback : Function
+    question : string;
+    answers : string[];
+    parentCallback : Function;
 }
 function MultipleQuestion({question, answers, parentCallback} : MultipleQuestionProps) {
 
@@ -12,29 +12,29 @@ function MultipleQuestion({question, answers, parentCallback} : MultipleQuestion
     [k: number]: boolean;
   }>({});
     const handleCheckboxChange = (event : SyntheticEvent<Element,Event>) => {
-      let index : number = Number((event.currentTarget as HTMLInputElement).value)
-      let checked : boolean = (event.currentTarget as HTMLInputElement).checked
-      let answer : string = (event.currentTarget as HTMLInputElement).value
+      let index : number = Number((event.currentTarget as HTMLInputElement).value);
+      let checked : boolean = (event.currentTarget as HTMLInputElement).checked;
+      let answer : string = (event.currentTarget as HTMLInputElement).value;
       let answerIndexes : string[] =Object.entries(selectedAnswers)
       .filter(([_, isSelected]) => isSelected)
-      .map(([index]) => index)
+      .map(([index]) => index);
       if(checked){
-        answerIndexes.push(answer)
+        answerIndexes.push(answer);
       }
       else{
-        answerIndexes = answerIndexes.filter((index) => index !== answer)
+        answerIndexes = answerIndexes.filter((index) => index !== answer);
       }
 
-      answer = answerIndexes.join(',')
+      answer = answerIndexes.join(',');
       setSelectedAnswers({
         ...selectedAnswers,
         [index]: checked,
       });
-      parentCallback(answer)
+      parentCallback(answer);
     };
     
     useEffect(() => {
-        parentCallback("")
+        parentCallback("");
       }, []);
   return (
     <>
@@ -43,7 +43,7 @@ function MultipleQuestion({question, answers, parentCallback} : MultipleQuestion
         {answers.map((answer, index)=> ( <FormControlLabel value={index} control={<Checkbox />} label={answer} onChange={handleCheckboxChange}/>))}
     </FormGroup>
     </>
-  )
+  );
 }
 
-export default MultipleQuestion
+export default MultipleQuestion;

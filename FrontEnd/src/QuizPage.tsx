@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './QuizPage.css'
+import { useEffect, useState } from 'react';
+import './QuizPage.css';
 import axios from 'axios';
 import SimpleQuestion from './Components/SimpleQuestion';
 import Stepper from '@mui/material/Stepper';
@@ -14,14 +14,14 @@ import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router';
 
-
 type Question = {
 id: number;
 type: number;
 question: string;
 correctAnswer: string;
 answers: string[];
-};
+}
+
 function QuizPage() {
   const [email, setEmail] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -36,9 +36,9 @@ function QuizPage() {
   const navigate = useNavigate();
 
   const handleCallback = (childData : string) =>{
-    // console.log(childData)
-    setAnswer(childData)
-  }
+    // console.log(childData);
+    setAnswer(childData);
+  };
 
   const totalSteps = () => {
     return questions.length;
@@ -85,24 +85,25 @@ function QuizPage() {
     })
     handleNext();
   };
+
   const handleSubmit = () =>{
     //Could not figure out how to pass the built in validation to here so I used the closest thing I found https://stackoverflow.com/a/7786283
-    let emailRegEx : RegExp = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*")
+    let emailRegEx : RegExp = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*");
     if(emailRegEx.test(email)){
-      console.log(answers)
       axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}/quizSubmit`,{
         answers: Object.entries(answers).map(([_, value]) => value),
         email: email
       })
     .then(function (response) {
-        console.log(response.data)
-        navigate("/high-scores")
+        console.log(response.data);
+        navigate("/high-scores");
     })
     .catch(function (error) {
-        console.log(error)
+        console.log(error);
     });
     }
-  }
+  };
+
   function GetQuizQuestions(){
     axios({
         method: 'get',
@@ -116,10 +117,12 @@ function QuizPage() {
     .catch(function (error) {
         console.log(error)
     });
-}
+};
+
   useEffect(() => {
    GetQuizQuestions()
  }, []);
+
   return (
     <>
       <div className="card">
@@ -145,7 +148,6 @@ function QuizPage() {
             </Box>
           </FormGroup>
             </>
-
         ) : (
           <>
                 {activeStep !== questions.length &&
@@ -198,7 +200,7 @@ function QuizPage() {
         )}
       </div>
     </>
-  )
+  );
 }
 
-export default QuizPage
+export default QuizPage;

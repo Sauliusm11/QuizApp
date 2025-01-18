@@ -1,6 +1,7 @@
 import { AppBar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
+
 function Header() {
   return (
     <>
@@ -26,7 +27,7 @@ function Header() {
     </Box>
     </AppBar>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

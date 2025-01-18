@@ -1,19 +1,19 @@
-import { FormGroup, TextField } from "@mui/material"
+import { FormGroup, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect } from "react";
 
 interface TextQuestionProps{
-    question : string
-    parentCallback : Function
+    question : string;
+    parentCallback : Function;
 }
 function TextQuestion({question, parentCallback} : TextQuestionProps) {
 
   const handleTextChange = (event : SyntheticEvent<Element,Event>) => {
-    let value : string = (event.currentTarget as HTMLInputElement).value
-    parentCallback(value)
+    let value : string = (event.currentTarget as HTMLInputElement).value;
+    parentCallback(value);
   };
 
   useEffect(() => {
-      parentCallback("")
+      parentCallback("");
     }, []);
   return (
     <>
@@ -22,7 +22,7 @@ function TextQuestion({question, parentCallback} : TextQuestionProps) {
         <TextField id="outlined-basic" autoFocus label="Answer" variant="outlined" onChange={handleTextChange}/>
     </FormGroup>
     </>
-  )
+  );
 }
 
-export default TextQuestion
+export default TextQuestion;

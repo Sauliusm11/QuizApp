@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './ScorePage.css'
+import { useEffect, useState } from 'react';
+import './ScorePage.css';
 import axios from 'axios';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -36,7 +36,8 @@ type Score = {
   dateTime: string;
   points: number;
   email: string;
-  };
+}
+
 function ScorePage() {
   const [scores, setScores] = useState<Score[]>();
 
@@ -55,10 +56,12 @@ function ScorePage() {
     .catch(function (error) {
         console.log(error)
     });
-}
+};
+
   useEffect(() => {
     GetHighScores()
  }, []);
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -89,7 +92,7 @@ function ScorePage() {
     </TableContainer>
 
     </>
-  )
+  );
 }
 
-export default ScorePage
+export default ScorePage;

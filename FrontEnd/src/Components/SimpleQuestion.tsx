@@ -1,20 +1,20 @@
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material"
-import { SyntheticEvent, useEffect } from "react"
+import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { SyntheticEvent, useEffect } from "react";
 
 interface SimpleQuestionProps{
-    question : string
-    answers : string[]
-    parentCallback : Function
+    question : string;
+    answers : string[];
+    parentCallback : Function;
 }
 function SimpleQuestion({question, answers, parentCallback} : SimpleQuestionProps) {
 
   const handleRadioChange = (event : SyntheticEvent<Element,Event>) => {
-    let value : string = (event.currentTarget as HTMLInputElement).value
-    parentCallback(value)
+    let value : string = (event.currentTarget as HTMLInputElement).value;
+    parentCallback(value);
   };
   
   useEffect(() => {
-     parentCallback("0")
+     parentCallback("0");
    }, []);
   return (
     <>
@@ -26,7 +26,7 @@ function SimpleQuestion({question, answers, parentCallback} : SimpleQuestionProp
         {answers.map((answer, index)=> ( <FormControlLabel value={index} control={<Radio />} label={answer} onChange={handleRadioChange}/>))}
     </RadioGroup>
     </>
-  )
+  );
 }
 
-export default SimpleQuestion
+export default SimpleQuestion;
