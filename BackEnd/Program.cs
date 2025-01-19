@@ -31,11 +31,6 @@ namespace BackEnd
                 app.UseSwaggerUI();
             }
 
-            //app.UseHttpsRedirection();
-
-            //app.UseAuthorization();
-
-
             app.MapGet("/quizQuestions", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository) =>
             {
                 var quizQuestions = quizQuestionRepository.GetQuizQuestions();
@@ -55,6 +50,7 @@ namespace BackEnd
                 ValidationResult validationResult = validator.Validate(createScoreDto);
                 if (validationResult.IsValid) { 
                     var quizQuestions = quizQuestionRepository.GetQuizAnswers();
+                    //Should never happen realistically 
                     if (quizQuestions == null || !quizQuestions.Any())
                     {
                         return Results.NoContent();
@@ -83,7 +79,6 @@ namespace BackEnd
                 }
                 else
                 {
-                    //TODO: Find which error works best for invalid email
                     return Results.BadRequest();
                 }
             })
