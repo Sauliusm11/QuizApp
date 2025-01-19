@@ -23,6 +23,7 @@ type Question = {
 
 function QuizPage() {
   const [email, setEmail] = useState("");
+  const [error,setError] = useState("");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [activeStep, setActiveStep] = useState(0);
   const [answer, setAnswer] = useState("");
@@ -98,8 +99,12 @@ function QuizPage() {
         navigate("/high-scores",{state : {score : response.data}});
     })
     .catch(function (error) {
+        setError("Please enter a valid email")
         console.log(error);
     });
+    }
+    else{
+      setError("Please enter a valid email")
     }
   };
 
@@ -140,7 +145,7 @@ function QuizPage() {
           <>
             <FormGroup onSubmit={handleSubmit}>
                 Enter your email
-                <TextField id="outlined-basic" autoFocus required label="Email" type="email" variant="outlined" onChange={e => setEmail(e.target.value)}/>
+                <TextField id="outlined-basic" autoFocus required label="Email" type="email" variant="outlined" onChange={e => setEmail(e.target.value)} error={error!==""?true:false} helperText={error!==""?error:"Enter your email"}/>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                   <Box sx={{ flex: '1 1 auto' }} />
                     <Button onClick={handleSubmit}>Submit</Button>
