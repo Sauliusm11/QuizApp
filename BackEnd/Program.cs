@@ -15,8 +15,6 @@ namespace BackEnd
 
             builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
             builder.Services.AddScoped<IScoreRepository, ScoreRepository>();
-            // Add services to the container.
-            builder.Services.AddAuthorization();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
