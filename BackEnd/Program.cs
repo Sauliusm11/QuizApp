@@ -13,6 +13,7 @@ namespace BackEnd
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //Adding in memory db repositories
             builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
             builder.Services.AddScoped<IScoreRepository, ScoreRepository>();
 
@@ -29,8 +30,10 @@ namespace BackEnd
                 app.UseSwaggerUI();
             }
 
+            //Get request handling for receiving questions
             app.MapGet("/quizQuestions", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository) =>
             {
+                //Pull questions from db without correct answers
                 var quizQuestions = quizQuestionRepository.GetQuizQuestions();
                 if (quizQuestions == null || !quizQuestions.Any())
                 {
@@ -42,18 +45,21 @@ namespace BackEnd
             .WithName("GetQuizQuestions")
             .WithOpenApi();
 
+            //Post request handling for submitting answers
             app.MapPost("/quizSubmit", (HttpContext httpContext, IQuizQuestionRepository quizQuestionRepository, CreateScoreDto createScoreDto, IScoreRepository scoreRepository) =>
             {
                 CreateScoreDtoValidator validator = new CreateScoreDtoValidator();
+                //Validate if email is valid and answers are not empty
                 ValidationResult validationResult = validator.Validate(createScoreDto);
                 if (validationResult.IsValid) { 
+                    //Pull questions from db, this time with correct answers
                     var quizQuestions = quizQuestionRepository.GetQuizAnswers();
                     //Should never happen realistically 
                     if (quizQuestions == null || !quizQuestions.Any())
                     {
                         return Results.NoContent();
                     }
-
+                    //Preparing scoring strategies
                     ScoringContext context = new ScoringContext();
                     SimpleScoring simpleScoring = new SimpleScoring();
                     MulitipleScoring mulitipleScoring = new MulitipleScoring();
@@ -64,6 +70,7 @@ namespace BackEnd
                     {
                         if(quizQuestions[i].Type != 1)
                         {
+                            //Both single selection questions and text questions can use the same equals method
                             context.SetScoringStrategy(simpleScoring);
                         }
                         else
@@ -83,6 +90,7 @@ namespace BackEnd
             .WithName("PostQuizAnswers")
             .WithOpenApi();
 
+            //Get request handling for receiving high scores
             app.MapGet("/scores", (HttpContext httpContext, IScoreRepository scoreRepository) =>
             {
                 var scores = scoreRepository.GetScores();

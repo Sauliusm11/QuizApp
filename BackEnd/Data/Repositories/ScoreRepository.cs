@@ -9,7 +9,11 @@ namespace BackEnd.Data.Repositories
         {
         
         }
-
+        /// <summary>
+        /// Add a score to the repository
+        /// </summary>
+        /// <param name="score">Total score(calculated internaly)</param>
+        /// <param name="email">Email (provided by user)</param>
         public void AddScore(int score, string email)
         {
             using (var context = new QuizDbContext())

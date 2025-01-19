@@ -18,6 +18,7 @@
                     }
                 }
             }
+            //( 100 / good answers) * correctly checked. No decimal points, rounded up.
             return (int)MathF.Ceiling(((float)100 /correctAnswers.Length)*answeredCorrectly);
         }
     }
