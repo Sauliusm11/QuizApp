@@ -16,7 +16,6 @@ function Header() {
             ml: 2,
           },
         }}
-        
       >
         <Link href="/quiz" underline="hover">
           {'Quiz'}

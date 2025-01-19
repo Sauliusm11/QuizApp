@@ -9,12 +9,12 @@ interface SimpleQuestionProps{
   parentCallback : Function;
 }
 function SimpleQuestion({question, answers, parentCallback} : SimpleQuestionProps) {
-
+  //Sends the updated answer to the parent
   const handleRadioChange = (event : SyntheticEvent<Element,Event>) => {
     let value : string = (event.currentTarget as HTMLInputElement).value;
     parentCallback(value);
   };
-  
+  //On remount, reset parent anwser string
   useEffect(() => {
      parentCallback("0");
   }, []);

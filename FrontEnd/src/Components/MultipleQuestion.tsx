@@ -15,32 +15,35 @@ function MultipleQuestion({question, answers, parentCallback} : MultipleQuestion
     [k: number]: boolean;
   }>({});
 
+  //Sends the updated set of answers to the parent
   const handleCheckboxChange = (event : SyntheticEvent<Element,Event>) => {
     let index : number = Number((event.currentTarget as HTMLInputElement).value);
     let checked : boolean = (event.currentTarget as HTMLInputElement).checked;
     let answer : string = (event.currentTarget as HTMLInputElement).value;
-
+    //Gets all currently selected answers
     let answerIndexes : string[] =Object.entries(selectedAnswers)
     .filter(([_, isSelected]) => isSelected)
     .map(([index]) => index);
 
     if(checked){
+      //If the answer is not selected add it to the list
       answerIndexes.push(answer);
     }
     else{
+      //Else - remove it from the list
       answerIndexes = answerIndexes.filter((index) => index !== answer);
     }
-
+    //Put the list of answers back together
     answer = answerIndexes.join(',');
-
+    //Store the new list internaly
     setSelectedAnswers({
       ...selectedAnswers,
       [index]: checked,
     });
-
+    //And send it to the parent
     parentCallback(answer);
   };
-  
+  //On remount, reset parent anwser string
   useEffect(() => {
       parentCallback("");
   }, []);

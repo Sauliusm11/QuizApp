@@ -13,6 +13,7 @@ import { ThemeProvider } from '@emotion/react';
 import { useLocation } from 'react-router';
 import { Alert } from '@mui/material';
 
+//Theme used inside of table body to color the top three scores
 const theme = createTheme({
   components: {
     MuiTableRow: {
@@ -25,7 +26,7 @@ const theme = createTheme({
             backgroundColor: "silver",
           },
           "&:nth-of-type(3)": {
-            backgroundColor: "#cd7f32",
+            backgroundColor: "#cd7f32",/*Bronze*/
           },
         },
       },
@@ -43,7 +44,7 @@ type Score = {
 function ScorePage() {
   const [scores, setScores] = useState<Score[]>();
   const location = useLocation()
-
+  // On remount, get updated scores
   function GetHighScores(){
     axios({
         method: 'get',
@@ -67,6 +68,7 @@ function ScorePage() {
 
   return (
     <>
+      {/* If user has been redirected from quiz - show them an alert with their score */}
       {location.state && <Alert>Your score of {location.state.score} submitted successfully </Alert>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -87,6 +89,7 @@ function ScorePage() {
                 </TableRow>
               </ThemeProvider>))
             ) : (
+              // If back end does not return scores
               <TableRow>
                 <TableCell align='center' colSpan={3}>No scores available</TableCell>
               </TableRow>

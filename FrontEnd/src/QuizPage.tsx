@@ -34,12 +34,13 @@ function QuizPage() {
     [k: number]: boolean;
   }>({});
   const navigate = useNavigate();
-
+  //Store current answer coming from child component
   const handleCallback = (childData : string) =>{
     // console.log(childData);
     setAnswer(childData);
   };
 
+  //Stepper methods
   const totalSteps = () => {
     return questions.length;
   };
@@ -73,7 +74,7 @@ function QuizPage() {
   const handleStep = (step: number) => () => {
     setActiveStep(step);
   };
-
+  //Store submited answer and mark question as complete
   const handleComplete = () => {
     setCompleted({
       ...completed,
@@ -86,6 +87,7 @@ function QuizPage() {
     handleNext();
   };
 
+  //Whole quiz is finished and email is provided
   const handleSubmit = () =>{
     //Could not figure out how to pass the built in validation to here so I used the closest thing I found https://stackoverflow.com/a/7786283
     let emailRegEx : RegExp = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*");
@@ -108,6 +110,7 @@ function QuizPage() {
     }
   };
 
+  //On remount, get updated quiz quesions
   function GetQuizQuestions(){
     axios({
         method: 'get',
@@ -129,6 +132,7 @@ function QuizPage() {
 
   return (
     <>
+      {/* Top part of stepper */}
       <Box sx={{ margin: '1.5rem' }}>
         <Stepper nonLinear activeStep={activeStep}>
           {questions.map((_, index) => (
@@ -141,6 +145,7 @@ function QuizPage() {
         </Stepper>
       </Box>
       <div>
+        {/* Once all questions have been answered show the email submitting form */}
         {allStepsCompleted() ? (
           <>
             <FormGroup onSubmit={handleSubmit}>
@@ -155,6 +160,7 @@ function QuizPage() {
         ) : (
           <>
             {activeStep !== questions.length && (completed[activeStep] ? (
+              //If user went back to an answered question display the currently saved answer(s)
               <Box>Submited answer: { questions[activeStep].type !== 2 ? (
                 questions[activeStep].answers.filter((_,index)=>answers[activeStep].split(",").map(Number).includes(index)).map((answer) => (
                 <p>{answer}</p>
@@ -166,6 +172,7 @@ function QuizPage() {
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
               Question {activeStep + 1}
             </Typography>
+            {/* Display the correct component based on question type */}
             {questions[activeStep].type === 0 ? (<SimpleQuestion question={questions[activeStep].question} answers={questions[activeStep].answers} parentCallback={handleCallback} key={activeStep}></SimpleQuestion>
             ) : (
               <>
@@ -174,6 +181,7 @@ function QuizPage() {
                 <TextQuestion question={questions[activeStep].question} parentCallback={handleCallback} key={activeStep}></TextQuestion>)}
               </>)  
             }
+            {/* Question navigation */}
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
@@ -187,6 +195,7 @@ function QuizPage() {
               <Button onClick={handleNext} sx={{ mr: 1 }}>
                 Next
               </Button>
+              {/* Answer (re)submitting buttons, disabled if no answer is selected */}
               {activeStep !== questions.length &&(completed[activeStep] ? (
                   // https://stackoverflow.com/questions/70886553/submitting-form-from-parent-component
                   <Button onClick={handleComplete} disabled={(answer === "" ? true : false)}>

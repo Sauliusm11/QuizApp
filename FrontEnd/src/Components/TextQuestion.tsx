@@ -7,12 +7,12 @@ interface TextQuestionProps{
   parentCallback : Function;
 }
 function TextQuestion({question, parentCallback} : TextQuestionProps) {
-
+  //Sends the updated answer to the parent
   const handleTextChange = (event : SyntheticEvent<Element,Event>) => {
     let value : string = (event.currentTarget as HTMLInputElement).value;
     parentCallback(value);
   };
-
+  //On remount, reset parent anwser string
   useEffect(() => {
       parentCallback("");
   }, []);
