@@ -38,6 +38,7 @@ namespace BackEnd.Data.Repositories
                         DateTime = score.DateTime,
                         Email = score.Email
                     }).OrderBy(score => score.Points).Reverse()
+                    .Take(10)
                     .ToList();
 
                 return list;
