@@ -1,7 +1,4 @@
 ﻿using BackEnd.Data.Entities.Questions;
-using Microsoft.EntityFrameworkCore;
-using System;
-
 namespace BackEnd.Data.Repositories
 {
     public class QuizQuestionRepository : IQuizQuestionRepository

@@ -1,5 +1,4 @@
 ﻿using BackEnd.Data.Entities;
-using BackEnd.Data.Entities.Questions;
 
 namespace BackEnd.Data.Repositories
 {

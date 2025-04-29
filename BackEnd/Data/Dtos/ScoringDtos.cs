@@ -1,5 +1,4 @@
-﻿using BackEnd.Data.Entities;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace BackEnd.Data.Dtos
 {

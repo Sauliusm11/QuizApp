@@ -1,7 +1,6 @@
 ﻿using BackEnd.Data.Entities;
 using BackEnd.Data.Entities.Questions;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace BackEnd.Data
 {
