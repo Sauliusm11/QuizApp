@@ -60,6 +60,7 @@ namespace BackEnd
                         return Results.NoContent();
                     }
                     //Preparing scoring strategies
+
                     ScoringContext context = new ScoringContext();
                     SimpleScoring simpleScoring = new SimpleScoring();
                     MulitipleScoring mulitipleScoring = new MulitipleScoring();
