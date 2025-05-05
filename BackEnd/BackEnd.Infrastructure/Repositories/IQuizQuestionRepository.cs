@@ -1,6 +1,6 @@
 ﻿using BackEnd.Data.Entities.Questions;
 
-namespace BackEnd.Data.Repositories
+namespace BackEnd.Infrastructure.Repositories
 {
     public interface IQuizQuestionRepository
     {

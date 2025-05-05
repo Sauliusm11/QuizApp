@@ -1,6 +1,6 @@
 ﻿using BackEnd.Data.Entities.Questions;
 using BackEnd;
-namespace BackEnd.Data.Repositories
+namespace BackEnd.Infrastructure.Repositories
 {
     public class QuizQuestionRepository : IQuizQuestionRepository
     {

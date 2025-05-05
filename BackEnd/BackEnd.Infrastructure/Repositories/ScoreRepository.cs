@@ -1,6 +1,6 @@
 ﻿using BackEnd.Data.Entities;
 
-namespace BackEnd.Data.Repositories
+namespace BackEnd.Infrastructure.Repositories
 {
     public class ScoreRepository : IScoreRepository
     {

@@ -1,6 +1,6 @@
-
-using BackEnd.Data.Dtos;
-using BackEnd.Data.Repositories;
+using BackEnd.Domain.Data.Dtos;
+using BackEnd.Infrastructure.Repositories;
+using BackEnd.Domain.Data.Dtos.Validators;
 using BackEnd.Strategy;
 using FluentValidation;
 using FluentValidation.Results;

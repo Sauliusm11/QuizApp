@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace BackEnd.Data.Dtos
+namespace BackEnd.Domain.Data.Dtos
 {
     public record ScoreDto(int id, DateTime DateTime,int points, string Email);
 
