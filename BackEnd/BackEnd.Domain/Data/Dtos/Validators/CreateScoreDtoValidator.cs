@@ -1,10 +1,4 @@
-﻿using BackEnd.Data.Dtos;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
 namespace BackEnd.Domain.Data.Dtos.Validators
 {
