@@ -4,7 +4,10 @@ namespace BackEnd.Infrastructure.Repositories
 {
     public class QuizQuestionRepository : IQuizQuestionRepository
     {
+        //GetInstance ensures that the instance is never null when exiting constructor
+        #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private static QuizQuestionRepository instance;
+        #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private static object threadLock = new object();
 
         /// <summary>
@@ -27,10 +30,8 @@ namespace BackEnd.Infrastructure.Repositories
                     if (instance == null)
                     {
                         instance = this;
-                        using (var context = new QuizDbContext())
-                        {
-                            context.SeedQuestions();
-                        }
+                        using var context = new QuizDbContext();
+                        context.SeedQuestions();
                     }
                 }
             }
@@ -43,21 +44,19 @@ namespace BackEnd.Infrastructure.Repositories
         /// <returns>Quiz questions with answers</returns>
         public List<QuizQuestion> GetQuizAnswers()
         {
-            using (var context = new QuizDbContext())
-            {
-                var list = context.QuizQuestions
-                    .Select(question => new QuizQuestion()
-                    {
-                        Id = question.Id,
-                        Type = question.Type,
-                        Question = question.Question,
-                        Answers = question.Answers,
-                        CorrectAnswer = question.CorrectAnswer
-                    })
-                    .ToList();
+            using var context = new QuizDbContext();
+            var list = context.QuizQuestions
+                .Select(question => new QuizQuestion()
+                {
+                    Id = question.Id,
+                    Type = question.Type,
+                    Question = question.Question,
+                    Answers = question.Answers,
+                    CorrectAnswer = question.CorrectAnswer
+                })
+                .ToList();
 
-                return list;
-            }
+            return list;
         }
         /// <summary>
         /// Get quiz questions without answers
@@ -65,21 +64,19 @@ namespace BackEnd.Infrastructure.Repositories
         /// <returns>Quiz questions without answers</returns>
         public List<QuizQuestion> GetQuizQuestions()
         {
-            using (var context = new QuizDbContext())
-            {
-                var list = context.QuizQuestions
-                    .Select(question => new QuizQuestion()
-                    {
-                        Id = question.Id,
-                        Type = question.Type,
-                        Question = question.Question,
-                        Answers = question.Answers,
-                        CorrectAnswer = ""
-                    })
-                    .ToList();
+            using var context = new QuizDbContext();
+            var list = context.QuizQuestions
+                .Select(question => new QuizQuestion()
+                {
+                    Id = question.Id,
+                    Type = question.Type,
+                    Question = question.Question,
+                    Answers = question.Answers,
+                    CorrectAnswer = ""
+                })
+                .ToList();
 
-                return list;
-            }
+            return list;
         }
     }
 }

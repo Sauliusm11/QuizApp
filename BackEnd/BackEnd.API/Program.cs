@@ -35,7 +35,7 @@ namespace BackEnd
             {
                 //Pull questions from db without correct answers
                 var quizQuestions = quizQuestionRepository.GetQuizQuestions();
-                if (quizQuestions == null || !quizQuestions.Any())
+                if (quizQuestions == null || quizQuestions.Count == 0)
                 {
                     return Results.NoContent();
                 }
@@ -55,13 +55,12 @@ namespace BackEnd
                     //Pull questions from db, this time with correct answers
                     var quizQuestions = quizQuestionRepository.GetQuizAnswers();
                     //Should never happen realistically 
-                    if (quizQuestions == null || !quizQuestions.Any())
+                    if (quizQuestions == null || quizQuestions.Count == 0)
                     {
                         return Results.NoContent();
                     }
-                    Scoring scoring = new Scoring();
-                    string[] answers = createScoreDto.answers;
-                    int score = scoring.GetScore(answers, quizQuestions);
+                    string[] answers = createScoreDto.Answers;
+                    int score = Scoring.GetScore(answers, quizQuestions);
                     scoreRepository.AddScore(score, createScoreDto.Email);
                     return Results.Ok(score);
                 }
@@ -77,7 +76,7 @@ namespace BackEnd
             app.MapGet("/scores", (HttpContext httpContext, IScoreRepository scoreRepository) =>
             {
                 var scores = scoreRepository.GetScores();
-                if (scores == null || !scores.Any())
+                if (scores == null || scores.Count == 0)
                 {
                     return Results.NoContent();
                 }
