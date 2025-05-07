@@ -8,7 +8,7 @@ namespace BackEnd.Infrastructure.Repositories
         #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private static QuizQuestionRepository instance;
         #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private static object threadLock = new object();
+        private static readonly object threadLock = new object();
 
         /// <summary>
         /// Public constructor, used by builder.Services.AddScoped
