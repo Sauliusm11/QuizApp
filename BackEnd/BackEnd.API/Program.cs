@@ -1,9 +1,9 @@
 using BackEnd.Domain.Data.Dtos;
 using BackEnd.Infrastructure.Repositories;
 using BackEnd.Domain.Data.Dtos.Validators;
-using BackEnd.Strategy;
 using FluentValidation;
 using FluentValidation.Results;
+using BackEnd.Domain.Scoring;
 
 namespace BackEnd
 {
@@ -59,27 +59,9 @@ namespace BackEnd
                     {
                         return Results.NoContent();
                     }
-                    //Preparing scoring strategies
-
-                    ScoringContext context = new ScoringContext();
-                    SimpleScoring simpleScoring = new SimpleScoring();
-                    MulitipleScoring mulitipleScoring = new MulitipleScoring();
-                    context.SetScoringStrategy(simpleScoring);
-                    int score = 0;
+                    Scoring scoring = new Scoring();
                     string[] answers = createScoreDto.answers;
-                    for (int i = 0; i < quizQuestions.Count; i++)
-                    {
-                        if(quizQuestions[i].Type != 1)
-                        {
-                            //Both single selection questions and text questions can use the same equals method
-                            context.SetScoringStrategy(simpleScoring);
-                        }
-                        else
-                        {
-                            context.SetScoringStrategy(mulitipleScoring);
-                        }
-                        score += context.GetScore(answers[i], quizQuestions[i].CorrectAnswer);
-                    }
+                    int score = scoring.GetScore(answers, quizQuestions);
                     scoreRepository.AddScore(score, createScoreDto.Email);
                     return Results.Ok(score);
                 }
