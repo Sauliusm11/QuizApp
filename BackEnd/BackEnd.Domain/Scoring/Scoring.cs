@@ -10,7 +10,7 @@ namespace BackEnd.Domain.Scoring
             int score = 0;
             for (int i = 0; i < quizQuestions.Count; i++) 
             {
-                if (quizQuestions[i].Type != 1)
+                if (quizQuestions[i].Type != QuestionType.Multiple)
                 {
                     score += GetScoreSingle(answers[i], quizQuestions[i].CorrectAnswer);
                 }
