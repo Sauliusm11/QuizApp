@@ -26,7 +26,10 @@ namespace BackEnd.Infrastructure.Repositories
             context.Scores.Add(scoreToAdd);
             context.SaveChanges();
         }
-
+        /// <summary>
+        /// Gets a list of the top 10 scores in the repository
+        /// </summary>
+        /// <returns>The top 10 scores in the repository</returns>
         public List<Score> GetScores()
         {
             using var context = new QuizDbContext();

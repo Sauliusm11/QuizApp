@@ -7,6 +7,12 @@ namespace BackEnd.Domain.Scoring
         private const int maxScoreAnswer = 100;
         private const int incorrectScoreAnswer = 0;//only for single choice and text
 
+        /// <summary>
+        /// Gets the total score of a submission
+        /// </summary>
+        /// <param name="answers"> List of answers provided by the user </param>
+        /// <param name="quizQuestions"> List of quiz questions with the correct answers</param>
+        /// <returns>The total score of a submission</returns>
         public static int GetScore(IList<string> answers, IList<QuizQuestion> quizQuestions)
         {
             int score = 0;
@@ -23,6 +29,12 @@ namespace BackEnd.Domain.Scoring
             }
             return score;
         }
+        /// <summary>
+        /// Calculates the score for questions where there is one exact answer
+        /// </summary>
+        /// <param name="answer">Answer submitted by the user</param>
+        /// <param name="correctAnswer">Expected answer to the question</param>
+        /// <returns>The score given for the answer</returns>
         private static int GetScoreSingle(string answer, string correctAnswer)
         {
             if (answer.Equals(correctAnswer))
@@ -34,7 +46,11 @@ namespace BackEnd.Domain.Scoring
                 return incorrectScoreAnswer;
             }
         }
-
+        /// Calculates the score for questions where there is more than one answer
+        /// </summary>
+        /// <param name="answer">Comma separated answers submitted by the user</param>
+        /// <param name="correctAnswer">Comma separated expected answers to the question</param>
+        /// <returns>The score given for the answers</returns>
         private static int GetScoreMulti(string answer, string correctAnswer)
         {
             string[] answers = answer.Split(",");

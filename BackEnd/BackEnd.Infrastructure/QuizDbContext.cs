@@ -6,8 +6,6 @@ namespace BackEnd
 {
     public class QuizDbContext : DbContext
     {
-        //private readonly IConfiguration _configuration;
-
         public DbSet<Score> Scores { get; set; }
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
 
@@ -16,6 +14,9 @@ namespace BackEnd
             optionsBuilder.UseInMemoryDatabase("InMemoryDb");
         }
 
+        /// <summary>
+        /// Generates all questions and places them in the repository
+        /// </summary>
         public void SeedQuestions()
         {
             //0 makes it automatic
