@@ -18,11 +18,13 @@ namespace BackEnd
 
         public void SeedQuestions()
         {
+            //0 makes it automatic
+            const int autoId = 0;
             List<QuizQuestion> questions = new List<QuizQuestion>
             {
                 new QuizQuestion()
                 {
-                    Id = 0,//0 makes it automatic
+                    Id = autoId,
                     Type = QuestionType.Simple,
                     Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                     CorrectAnswer ="0",
@@ -35,7 +37,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Simple,
                     Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                     CorrectAnswer ="0",
@@ -49,7 +51,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Simple,
                     Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                     CorrectAnswer ="1",
@@ -63,7 +65,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Simple,
                     Question ="Mimic Logic: one of the answers is lying and the others are telling the truth. The lying one is the mimic - select the mimic",
                     CorrectAnswer ="3",
@@ -77,7 +79,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Multiple,
                     Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                     CorrectAnswer ="0,2",
@@ -91,7 +93,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Multiple,
                     Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                     CorrectAnswer ="0,1,3",
@@ -105,7 +107,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Multiple,
                     Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                     CorrectAnswer ="2",
@@ -120,7 +122,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Multiple,
                     Question ="Mimic Logic hard mode: one(or more, but not all!) of the answers is lying and the others are telling the truth. The lying answers are the mimic - select all mimics",
                     CorrectAnswer ="0,3,4",
@@ -135,7 +137,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Text,
                     Question ="Did I spend too much time coming up with these mimic logic questions? \n " +
                     "Please capitalize the first letter of your answer",
@@ -144,7 +146,7 @@ namespace BackEnd
                 },
                 new QuizQuestion()
                 {
-                    Id=0,//0 makes it automatic
+                    Id=autoId,
                     Type = QuestionType.Text,
                     Question ="But was it fun? \n " +
                     "Please capitalize the first letter of your answer",

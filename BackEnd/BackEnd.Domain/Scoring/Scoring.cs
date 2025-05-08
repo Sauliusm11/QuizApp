@@ -4,6 +4,8 @@ namespace BackEnd.Domain.Scoring
 {
     public class Scoring
     {
+        private const int maxScoreAnswer = 100;
+        private const int incorrectScoreAnswer = 0;//only for single choice and text
 
         public static int GetScore(IList<string> answers, IList<QuizQuestion> quizQuestions)
         {
@@ -25,11 +27,11 @@ namespace BackEnd.Domain.Scoring
         {
             if (answer.Equals(correctAnswer))
             {
-                return 100;
+                return maxScoreAnswer;
             }
             else
             {
-                return 0;
+                return incorrectScoreAnswer;
             }
         }
 
@@ -50,7 +52,7 @@ namespace BackEnd.Domain.Scoring
                 }
             }
             //( 100 / good answers) * correctly checked. No decimal points, rounded up.
-            return (int)MathF.Ceiling(((float)100 / correctAnswers.Length) * answeredCorrectly);
+            return (int)MathF.Ceiling(((float)maxScoreAnswer / correctAnswers.Length) * answeredCorrectly);
         }
     }
 }
