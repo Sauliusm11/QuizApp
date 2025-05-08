@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BackEnd.Data.Entities
+namespace BackEnd.Domain.Data.Entities
 {
     public class Score
     {

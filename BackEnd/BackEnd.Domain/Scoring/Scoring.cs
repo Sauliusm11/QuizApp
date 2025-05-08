@@ -1,4 +1,4 @@
-﻿using BackEnd.Data.Entities.Questions;
+﻿using BackEnd.Domain.Data.Entities.Questions;
 
 namespace BackEnd.Domain.Scoring
 {

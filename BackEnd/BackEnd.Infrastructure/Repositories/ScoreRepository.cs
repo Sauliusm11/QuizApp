@@ -1,4 +1,4 @@
-﻿using BackEnd.Data.Entities;
+﻿using BackEnd.Domain.Data.Entities;
 
 namespace BackEnd.Infrastructure.Repositories
 {

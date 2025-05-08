@@ -1,5 +1,5 @@
-﻿using BackEnd.Data.Entities;
-using BackEnd.Data.Entities.Questions;
+﻿using BackEnd.Domain.Data.Entities;
+using BackEnd.Domain.Data.Entities.Questions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEnd

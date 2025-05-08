@@ -1,4 +1,4 @@
-﻿namespace BackEnd.Data.Entities.Questions
+﻿namespace BackEnd.Domain.Data.Entities.Questions
 {
     public class QuizQuestion
     {
